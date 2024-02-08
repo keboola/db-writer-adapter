@@ -46,8 +46,6 @@ abstract class BaseTest extends TestCase
 
         // Clear all proxies
         $this->clearAllProxies();
-
-//        $this->dropAllTables();
     }
 
     /**
