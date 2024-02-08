@@ -167,9 +167,7 @@ SQL;
         ExportConfig $exportConfig,
         string $stageTableName,
     ): string {
-        $columns = array_map(function ($item) use ($connection) {
-            return $connection->quoteIdentifier($item->getDbName());
-        }, $exportConfig->getItems());
+        $columns = $this->quotedDbColumnNames($exportConfig->getItems(), $connection);
 
         return sprintf(
             'INSERT INTO %s (%s) SELECT * FROM %s',
@@ -190,5 +188,16 @@ SQL;
             'DESCRIBE %s',
             $connection->quoteIdentifier($dbName),
         );
+    }
+
+    /**
+     * @param ItemConfig[] $items
+     * @return string[]
+     */
+    protected function quotedDbColumnNames(array $items, Connection $connection): array
+    {
+        return array_map(function ($item) use ($connection) {
+            return $connection->quoteIdentifier($item->getDbName());
+        }, $items);
     }
 }
