@@ -1,0 +1,11 @@
+--- /dev/null
++++ ../src/Proxy.php
+@@ -203,7 +203,7 @@
+     /**
+      * @param string $type
+      * @param string $stream
+-     * @param string $toxicity
++     * @param float $toxicity
+      * @param array $attributes
+      * @param string|null $name
+      * @return Toxic

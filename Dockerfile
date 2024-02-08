@@ -51,6 +51,7 @@ RUN set -ex; \
 ## Composer - deps always cached unless changed
 # First copy only composer files
 COPY composer.* /code/
+COPY patches /code/patches
 
 # Download dependencies, but don't run scripts or init autoloaders as the app is missing
 RUN composer install $COMPOSER_FLAGS --no-scripts --no-autoloader
