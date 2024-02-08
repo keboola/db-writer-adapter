@@ -136,16 +136,16 @@ abstract class BaseWriteAdapter implements WriteAdapter
      */
     public function validateTable(string $tableName, array $items): void
     {
-        $dbBolumns = $this->getTableInfo($tableName);
+        $dbColumns = $this->getTableInfo($tableName);
         foreach ($items as $item) {
-            $dbBolumn = array_filter(
-                $dbBolumns,
+            $dbColumn = array_filter(
+                $dbColumns,
                 function ($column) use ($item) {
                     return $column['Field'] === $item->getDbName();
                 },
             );
 
-            if (count($dbBolumn) !== 1) {
+            if (count($dbColumn) !== 1) {
                 throw new UserException(sprintf(
                     'Column \'%s\' not found in destination table \'%s\'',
                     $item->getDbName(),
@@ -156,7 +156,7 @@ abstract class BaseWriteAdapter implements WriteAdapter
             $dbDataType = (string) preg_replace(
                 '/\(.*\)/',
                 '',
-                current($dbBolumn)['Type'],
+                current($dbColumn)['Type'],
             );
 
             if (strtolower($dbDataType) !== strtolower($item->getType())) {
