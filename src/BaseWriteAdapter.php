@@ -138,12 +138,7 @@ abstract class BaseWriteAdapter implements WriteAdapter
     {
         $dbColumns = $this->getTableInfo($tableName);
         foreach ($items as $item) {
-            $dbColumn = array_filter(
-                $dbColumns,
-                function ($column) use ($item) {
-                    return $column['Field'] === $item->getDbName();
-                },
-            );
+            $dbColumn = $this->filterColumnsByName($dbColumns, $item->getDbName());
 
             if (count($dbColumn) !== 1) {
                 throw new UserException(sprintf(
@@ -184,5 +179,19 @@ abstract class BaseWriteAdapter implements WriteAdapter
         );
 
         return $res;
+    }
+
+    /**
+     * @param array{Field: string, Type: string}[] $dbColumns
+     * @return array{Field: string, Type: string}[]
+     */
+    protected function filterColumnsByName(array $dbColumns, string $columnName): array
+    {
+        return array_filter(
+            $dbColumns,
+            function ($column) use ($columnName) {
+                return $column['Field'] === $columnName;
+            },
+        );
     }
 }
