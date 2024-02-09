@@ -5,7 +5,7 @@
     "require": {
         "php": "^8.2",
         "ext-mbstring": "*",
-        "keboola/db-writer-config": "dev-ondra-init-config",
+        "keboola/db-writer-config": "^0.1.0",
         "keboola/php-component": "^9.0",
         "keboola/retry": "^0.5.1",
         "psr/log": "^1.1"
