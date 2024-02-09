@@ -15,7 +15,7 @@ jobs:
         steps:
             -
                 name: 'Check out the repo'
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
             -
                 name: 'Print Docker version'
                 run: 'docker -v'
@@ -28,5 +28,7 @@ jobs:
                 run: 'docker build -t $APP_IMAGE .'
             -
                 name: 'Run tests'
-                run: 'docker run ${{env.APP_IMAGE}} composer ci'
+                run: |
+                    docker-compose run --rm wait
+                    docker-compose run --rm app
 

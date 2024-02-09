@@ -4,36 +4,41 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "keboola/php-component": "^9.0"
+        "ext-mbstring": "*",
+        "keboola/db-writer-config": "^0.1.0",
+        "keboola/php-component": "^9.0",
+        "keboola/retry": "^0.5.1",
+        "psr/log": "^1.1"
     },
     "require-dev": {
-        "php-parallel-lint/php-parallel-lint": "^1.3",
+        "cweagans/composer-patches": "^1.7",
+        "ihsw/toxiproxy-php-client": "^2.0",
         "keboola/coding-standard": ">=7.0.2",
+        "keboola/csv": "^4.0",
         "keboola/datadir-tests": "^5.3",
         "keboola/php-temp": "^2.0",
+        "php-parallel-lint/php-parallel-lint": "^1.3",
         "phpstan/phpstan": "^1.4",
         "phpunit/phpunit": "^9.5",
-        "symfony/process": "^5.0"
+        "symfony/filesystem": "^6.3",
+        "symfony/process": "^5.0",
+        "symplify/vendor-patches": "^11.3"
     },
     "autoload": {
         "psr-4": {
-            "MyComponent\\": "src/"
+            "Keboola\\DbWriterAdapter\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "MyComponent\\Tests\\": "tests/phpunit/",
-            "MyComponent\\FunctionalTests\\": "tests/functional/"
+            "Keboola\\DbWriterAdapter\\Tests\\": "tests/phpunit/"
         }
     },
     "scripts": {
         "tests-phpunit": "phpunit",
-        "tests-datadir": "phpunit tests/functional",
         "tests": [
-            "@tests-phpunit",
-            "@tests-datadir"
+            "@tests-phpunit"
         ],
-
         "phpstan": "phpstan analyse ./src ./tests --level=max --no-progress -c phpstan.neon",
         "phpcs": "phpcs -n --ignore=vendor --extensions=php .",
         "phpcbf": "phpcbf -n --ignore=vendor --extensions=php .",
@@ -53,7 +58,15 @@
         "sort-packages": true,
         "optimize-autoloader": true,
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "cweagans/composer-patches": true
+        }
+    },
+    "extra": {
+        "patches": {
+            "ihsw/toxiproxy-php-client": [
+                "patches/ihsw-toxiproxy-php-client-src-proxy-php.patch"
+            ]
         }
     }
 }
