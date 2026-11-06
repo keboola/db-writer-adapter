@@ -60,6 +60,12 @@
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "cweagans/composer-patches": true
+        },
+        "audit": {
+            "ignore": {
+                "guzzlehttp/guzzle": "Dev-only: test helper ihsw/toxiproxy-php-client v2 needs guzzle 6 (v3 requires PHP 8.3)",
+                "guzzlehttp/psr7": "Dev-only: test helper ihsw/toxiproxy-php-client v2 needs guzzle 6 (v3 requires PHP 8.3)"
+            }
         }
     },
     "extra": {
