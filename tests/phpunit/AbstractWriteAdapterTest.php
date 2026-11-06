@@ -385,7 +385,9 @@ abstract class AbstractWriteAdapterTest extends BaseTest
 
             $dbColumn = current($dbColumn);
 
-            preg_match('/^(\w+)(\((\d+,?\d*)\))?$/', $dbColumn['Type'], $matches);
+            if (preg_match('/^(\w+)(\((\d+,?\d*)\))?$/', $dbColumn['Type'], $matches) !== 1) {
+                Assert::fail(sprintf('Unexpected column type "%s".', $dbColumn['Type']));
+            }
             $type = $matches[1];
             match ($type) {
                 'tinyint' => $type = 'bool',

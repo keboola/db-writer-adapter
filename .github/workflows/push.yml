@@ -29,6 +29,6 @@ jobs:
             -
                 name: 'Run tests'
                 run: |
-                    docker-compose run --rm wait
-                    docker-compose run --rm app
+                    docker compose run --rm wait
+                    docker compose run --rm app
 
