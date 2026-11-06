@@ -15,6 +15,7 @@ This library contains a common interface for connecting to database and writing 
     - Abstract class [`BaseWriteAdapter`](https://github.com/keboola/db-writer-adapter/blob/main/src/BaseWriteAdapter.php) contains common code.
     - Class [`PdoWriteAdapter`](https://github.com/keboola/db-writer-adapter/blob/main/src/PDO/PdoWriteAdapter.php) implements write for PDO connection.
     - Class [`OdbcWriteAdapter`](https://github.com/keboola/db-writer-adapter/blob/main/src/ODBC/OdbcWriteAdapter.php) implements write for ODBC connection.
+- **Interface [`DescriptionWriteAdapter`](https://github.com/keboola/db-writer-adapter/blob/main/src/DescriptionWriteAdapter.php)** is an optional capability for writing Storage table and column descriptions as comments; value object [`TableDescriptions`](https://github.com/keboola/db-writer-adapter/blob/main/src/ValueObject/TableDescriptions.php) carries them.
 - **Interface [`QueryBuilder`](https://github.com/keboola/db-writer-adapter/blob/main/src/Query/QueryBuilder.php)** used to generate SQL query for adapter.
     - Class [`DefaultQueryFactory`](https://github.com/keboola/db-writer-adapter/blob/main/src/Query/DefaultQueryFactory.php) is base implementation for MySQL/MariaDb compatible SQL dialects.
 
